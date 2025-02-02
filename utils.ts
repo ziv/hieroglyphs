@@ -1,14 +1,11 @@
 import { ClickRule } from "./rule.ts";
 
+const isRule = (i: unknown): i is ClickRule =>
+  typeof i === "object" && i !== null && "id" in i && "cssPath" in i && "route" in i && "type" in i;
+
 export function validate(input: unknown): ClickRule {
-  if (typeof input !== "object" || input === null) {
-    throw new Error("invalid input");
-  }
-  if (
-    !("id" in input) || !("description" in input) || !("cssPath" in input) ||
-    !("route" in input) || !("type" in input)
-  ) {
-    throw new Error("missing fields");
+  if (!isRule(input)) {
+    throw new Error("invalid rule");
   }
   if ("click-rule" !== input.type) {
     throw new Error("wrong type");
