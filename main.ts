@@ -1,5 +1,5 @@
 import * as log from "@std/log";
-import { cors, json, notFound, validate } from "./utils.ts";
+import { json, notFound, validate } from "./utils.ts";
 import { RulesDoc } from "./rule.ts";
 
 log.setup({
@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
     const method = req.method.toLowerCase();
     log.info("incoming request", method, pathname);
     if ("options" === method) {
-      return cors();
+      return json({});
     }
 
     if ("post" === method) {
