@@ -5,6 +5,7 @@
     "dev": "deno run --watch main.ts"
   },
   "imports": {
+    "@std/http": "jsr:@std/http@^1.0.13",
     "@std/log": "jsr:@std/log@^0.224.14"
   },
   "fmt": {
