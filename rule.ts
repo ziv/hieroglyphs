@@ -9,12 +9,6 @@ export type ClickRule = {
   // matchers
   cssPath: string;
   route: string;
-  // conditions
-  // start: Date;
-  // end: Date;
-
-  // actions
-  // collectors: string[];
 };
 
 export type RulesDoc = {

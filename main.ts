@@ -35,7 +35,7 @@ async function saveRule(host: string, rule: ClickRule) {
 const routes: Route[] = [
   {
     method: "get",
-    pattern: new URLPattern({ pathname: "/rules/:host" }),
+    pattern: new URLPattern({ pathname: '/rules/:host' }),
     handler: (_r, params) => onError(() => json(getRules(params?.pathname.groups.host as string))),
   },
   {
@@ -46,5 +46,5 @@ const routes: Route[] = [
   },
 ];
 
-Deno.serve(route(routes, () => notFound()));
+Deno.serve(route(routes, (req) => notFound(req)));
 log.info("server started");

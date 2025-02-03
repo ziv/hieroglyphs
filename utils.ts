@@ -25,7 +25,8 @@ export async function json(data: unknown, status = 200) {
   });
 }
 
-export function notFound() {
+export function notFound(req?: Request) {
+  log.warn("not found", req?.url);
   return json({ message: "not-found" }, 404);
 }
 
