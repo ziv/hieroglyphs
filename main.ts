@@ -34,12 +34,12 @@ async function saveRule(host: string, rule: ClickRule) {
 
 const routes: Route[] = [
   {
-    method: "get",
-    pattern: new URLPattern({ pathname: '/rules/:host' }),
+    method: "GET",
+    pattern: new URLPattern({ pathname: "/rules/:host" }),
     handler: (_r, params) => onError(() => json(getRules(params?.pathname.groups.host as string))),
   },
   {
-    method: "post",
+    method: "POST",
     pattern: new URLPattern({ pathname: "/rules/:host" }),
     handler: (r, params) =>
       onError(async () => json(saveRule(params?.pathname.groups.host as string, validate(await r.json())))),
