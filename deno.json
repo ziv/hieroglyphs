@@ -2,11 +2,13 @@
   "id": "hieroglyphs",
   "nodeModulesDir": "auto",
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run -A --unstable-kv --watch main.ts"
   },
   "imports": {
     "@std/http": "jsr:@std/http@^1.0.13",
-    "@std/log": "jsr:@std/log@^0.224.14"
+    "@xpr/http-kv": "jsr:@xpr/http-kv@^0.0.1",
+    "@xpr/sat": "jsr:@xpr/sat@0.0.2",
+    "jose": "npm:jose@^5.9.6"
   },
   "fmt": {
     "lineWidth": 120
