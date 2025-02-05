@@ -74,8 +74,8 @@ function recorder() {
         }
         --tries;
     };
-    const { pathname } = new URL(location.href);
-    const url = `https://hieroglyphs.deno.dev/rules/${pathname}?y=${Date.now()}`;
+    const { hostname } = new URL(location.href);
+    const url = `https://hieroglyphs.deno.dev/rules/${hostname}?y=${Date.now()}`;
     debuglog("fetching rules", url);
     fetch(url).then((res) => res.json()).then((r) => {
         rules = r;
