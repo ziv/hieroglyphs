@@ -28,6 +28,14 @@ async function authenticate(req: Request): Promise<JWTPayload> {
 const routes: Route[] = [
   {
     method: "GET",
+    pattern: new URLPattern({ pathname: "/js/recorder.js" }),
+    handler: async () => {
+      const file = await Deno.open("./rec.js", { read: true });
+      return new Response(file.readable, { headers: cors() });
+    },
+  },
+  {
+    method: "GET",
     pattern: new URLPattern({ pathname: "/rules/:host" }),
     handler: async (_r, params) => {
       try {
