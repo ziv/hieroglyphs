@@ -1,6 +1,7 @@
-atob("G1s0NG0bWzM3bSBIUkdMUEhTIBtbMzltG1s0OW0=");
+const BLUE_NAME = atob("G1s0NG0bWzM3bSBIUkdMUEhTIBtbMzltG1s0OW0=");
 atob("G1s0MW0bWzM3bSBIUkdMUEhTIBtbMzltG1s0OW0=");
 function debuglog(msg, ...args) {
+    console.log(BLUE_NAME, msg, ...args);
 }
 function safeQuery(selector) {
     if (!selector || !document) {
@@ -48,14 +49,17 @@ function record(rule) {
 let rules = [];
 let obs = null;
 function recorder() {
+    debuglog("recorder");
     obs && (obs == null ? void 0 : obs.disconnect());
     let tries = 100;
     const connect = () => {
+        debuglog("connect");
         const remove = [];
         for (const r of rules) {
             debuglog("looking for", r.cssPath);
             const el = safeQuery(r.cssPath);
             if (el instanceof HTMLElement) {
+                debuglog("element found", r, el);
                 el.addEventListener("click", record(r));
                 remove.push(r);
             }
@@ -72,6 +76,7 @@ function recorder() {
     };
     fetch("https://hieroglyphs.deno.dev/rules/dev.zoominfo.com:8080?y=" + Date.now()).then((res) => res.json()).then((r) => {
         rules = r;
+        debuglog("rules loaded after navigation", rules);
         connect();
         obs = new MutationObserver(debounce(connect, 500));
         obs.observe(document.body, { subtree: true, childList: true });
@@ -80,3 +85,4 @@ function recorder() {
 window.navigation.addEventListener("navigate", recorder);
 document.addEventListener("DOMContentLoaded", recorder);
 recorder();
+debuglog("started");
