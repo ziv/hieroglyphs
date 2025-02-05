@@ -74,7 +74,10 @@ function recorder() {
         }
         --tries;
     };
-    fetch("https://hieroglyphs.deno.dev/rules/dev.zoominfo.com:8080?y=" + Date.now()).then((res) => res.json()).then((r) => {
+    const { pathname } = new URL(location.href);
+    const url = `https://hieroglyphs.deno.dev/rules/${pathname}?y=${Date.now()}`;
+    debuglog("fetching rules", url);
+    fetch(url).then((res) => res.json()).then((r) => {
         rules = r;
         debuglog("rules loaded after navigation", rules);
         connect();

@@ -6,6 +6,6 @@ const token = await new SignJWT({ email: "dummy" })
   .setProtectedHeader({ alg: "HS256" })
   .setIssuedAt()
   .setExpirationTime("1h")
-  .sign(new TextEncoder().encode(Deno.env.get("KV_SECRET")));
+  .sign(new TextEncoder().encode("dkhCzP90aNIw1qJHmLhk4xfjkwqywSP5JHbg223Zi3oPA0Xc8l"));
 
 console.log(await new HttpKv("https://hieroglyphs.deno.dev/rpc", token).get(Deno.args));
