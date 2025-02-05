@@ -42,7 +42,7 @@ function debounce(fn, wait) {
 }
 function record(rule) {
     return function(e) {
-        console.log("%cEVENT DETECTED!!!!!", "color: red; font-size:5em");
+        console.log("%cEVENT DETECTED!!!!! " + rule.id, "color: red; font-size:5em");
     };
 }
 let rules = [];
@@ -56,7 +56,7 @@ function recorder() {
             debuglog("looking for", r.cssPath);
             const el = safeQuery(r.cssPath);
             if (el instanceof HTMLElement) {
-                el.addEventListener("click", record());
+                el.addEventListener("click", record(r));
                 remove.push(r);
             }
         }
