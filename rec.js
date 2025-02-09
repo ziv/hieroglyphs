@@ -42,24 +42,24 @@ function debounce(fn, wait) {
     return debounced;
 }
 function record(rule) {
-    return function(e) {
-        console.log("%cEVENT DETECTED!!!!! " + rule.id, "color: red; font-size:5em");
+    return function(_) {
+        console.log("(xrx) %cEVENT DETECTED!!!!! " + rule.id, "color: orange; font-size:2em");
     };
 }
 let rules = [];
 let obs = null;
 function recorder() {
-    debuglog("recorder");
+    debuglog("(xrx) search for elements to match rules");
     obs && (obs == null ? void 0 : obs.disconnect());
     let tries = 100;
     const connect = () => {
-        debuglog("connect");
+        debuglog("(xrx) connect");
         const remove = [];
         for (const r of rules) {
-            debuglog("looking for", r.cssPath);
+            debuglog("(xrx) looking for", r.cssPath);
             const el = safeQuery(r.cssPath);
             if (el instanceof HTMLElement) {
-                debuglog("element found", r, el);
+                debuglog("(xrx) element found", r, el);
                 el.addEventListener("click", record(r));
                 remove.push(r);
             }
@@ -76,10 +76,10 @@ function recorder() {
     };
     const { hostname } = new URL(location.href);
     const url = `https://hieroglyphs.deno.dev/rules/${hostname}?y=${Date.now()}`;
-    debuglog("fetching rules", url);
+    debuglog("(xrx) fetching rules", url);
     fetch(url).then((res) => res.json()).then((r) => {
         rules = r;
-        debuglog("rules loaded after navigation", rules);
+        debuglog("(xrx) rules loaded after navigation", rules);
         connect();
         obs = new MutationObserver(debounce(connect, 500));
         obs.observe(document.body, { subtree: true, childList: true });

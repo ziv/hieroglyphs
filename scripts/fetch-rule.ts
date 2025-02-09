@@ -8,4 +8,4 @@ const token = await new SignJWT({ email: "dummy" })
   .setExpirationTime("1h")
   .sign(new TextEncoder().encode("dkhCzP90aNIw1qJHmLhk4xfjkwqywSP5JHbg223Zi3oPA0Xc8l"));
 
-console.log(await new HttpKv("https://hieroglyphs.deno.dev/rpc", token).get(Deno.args));
+console.log(await new HttpKv("https://hieroglyphs.deno.dev/rpc", token).delete(Deno.args));
